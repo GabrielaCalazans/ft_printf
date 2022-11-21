@@ -6,7 +6,7 @@
 /*   By: gacalaza <gacalaza@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 23:16:25 by gacalaza          #+#    #+#             */
-/*   Updated: 2022/11/19 00:30:47 by gacalaza         ###   ########.fr       */
+/*   Updated: 2022/11/21 14:46:27 by gacalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			count_char += print_message(format[i], args);
+			count_char += ft_print_message(format[i], args);
 		}
 		else
 			count_char += (int)write(1, &format[i], 1);
@@ -38,46 +38,46 @@ int	ft_printf(const char *format, ...)
 	return (count_char);
 }
 
-int	print_message(char c, va_list args)
+int	ft_print_message(char specifier, va_list args)
 {
-	if (c == 'c')
-		return (intputchar(va_arg(args, int)));
-	else if (c == 's')
-		return (intputstr(va_arg(args, char *)));
-	else if (c == 'p')
-		return (put_ptr(va_arg(args, unsigned long int), HEX_LOW));
-	else if (c == 'd' || c == 'i')
-		return (intputnbr(va_arg(args, int)));
-	else if (c == 'u')
-		return (unsputnbr(va_arg(args, unsigned int)));
-	else if (c == 'x')
-		return (putnbr_hex(va_arg(args, unsigned int), HEX_LOW));
-	else if (c == 'X')
-		return (putnbr_hex(va_arg(args, unsigned int), HEX_UPPER));
-	else if (c == '%')
+	if (specifier == 'c')
+		return (printf_char(va_arg(args, int)));
+	else if (specifier == 's')
+		return (printf_str(va_arg(args, char *)));
+	else if (specifier == 'p')
+		return (printf_ptr(va_arg(args, unsigned long int), HEX_LOW));
+	else if (specifier == 'd' || specifier == 'i')
+		return (printf_nbr(va_arg(args, int)));
+	else if (specifier == 'u')
+		return (printf_unsnbr(va_arg(args, unsigned int)));
+	else if (specifier == 'x')
+		return (printf_hexnbr(va_arg(args, unsigned int), HEX_LOW));
+	else if (specifier == 'X')
+		return (printf_hexnbr(va_arg(args, unsigned int), HEX_UPPER));
+	else if (specifier == '%')
 		return ((int)write(1, "%", 1));
 	else
-		return ((int)write(1, "%", 1) + (int)write(1, &c, 1));
+		return ((int)write(1, "%", 1) + (int)write(1, &specifier, 1));
 }
 
-int	intputchar(int c)
+int	printf_char(int c)
 {
 	write(1, &c, 1);
 	return (1);
 }
 
-int	intputstr(char *s)
+int	printf_str(char *str)
 {
 	int	count;
 	int	count_char;
 
 	count = 0;
 	count_char = 0;
-	if (!s)
+	if (!str)
 		return ((int)write(1, "(null)", 6));
-	while (s[count])
+	while (str[count])
 	{
-		count_char += (int)write(1, &s[count], 1);
+		count_char += (int)write(1, &str[count], 1);
 		count++;
 	}
 	return (count_char);

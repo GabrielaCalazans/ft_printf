@@ -6,7 +6,7 @@
 /*   By: gacalaza <gacalaza@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 23:16:29 by gacalaza          #+#    #+#             */
-/*   Updated: 2022/11/19 00:31:04 by gacalaza         ###   ########.fr       */
+/*   Updated: 2022/11/21 14:45:17 by gacalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@
 # endif
 
 int	ft_printf(const char *format, ...);
-int	print_message(char c, va_list args);
-int	intputchar(int c);
-int	intputstr(char *s);
-int	putnbr_hex(unsigned long n, char *base);
-int	put_ptr(unsigned long n, char *base);
-int	intputnbr(int n);
-int	unsputnbr(unsigned int n);
+int	ft_print_message(char specifier, va_list args);
+int	printf_char(int c);
+int	printf_str(char *str);
+int	printf_nbr(int nbr);
+int	printf_unsnbr(unsigned int nbr);
+int	printf_hexnbr(unsigned long nbr, char *base);
+int	printf_ptr(unsigned long nbr, char *base);
 
 #endif
